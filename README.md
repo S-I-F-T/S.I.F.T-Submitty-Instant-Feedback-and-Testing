@@ -1,5 +1,1 @@
-
-**Research from small groups 1/30:**
-Docker is a tool used to package and distribute software without needing to install all the various parts individually. Docker containers are the way this is accomplished. Containers hold all the various parts of an application such as source code, libraries, dependencies, runtimes, etc. These containers can be used to create "images" that essentially run the program. Images can be uploaded to cloud platforms like DockerHub, AWS, etc to allow other people to download and run them. Docker also has a feature called volumes. Volumes can be used to maintain files related to containers that persist even after the container has stopped running, and be used by other containers. This is useful for storing information that needs to be retrieved later.
-
-CustomTkInter can be used to create effective UIs for applications in Python. It has easy to use features that allow for highly customizable UI creation, and as a importable library, it makes it simple to integrate your code into a useable application.
+S.I.F.T, stading for Submitty Instant-Feedback and Testing is an application separate from Submitty, that allows students to locally run Submitty autograding tests without the worry about going over the limit. Plus, it will be faster as it is done on the user's local device
