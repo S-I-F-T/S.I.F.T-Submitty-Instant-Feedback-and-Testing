@@ -1,5 +1,9 @@
 import subprocess
+import time
+import os
 
-cmd = 'javac "/Users/Abedalah Safi/Documents/Classes/CSCI2600/hw0/safia2/src/test/java/hw0/BallTest.java"'
+path = os.path.join("javaTestingSite")
 
-subprocess.run(cmd, shell=True)
+cmd = ['java ', ' -jar', path]
+
+subprocess.run(cmd)
