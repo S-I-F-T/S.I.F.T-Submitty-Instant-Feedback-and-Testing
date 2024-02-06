@@ -6,3 +6,9 @@ Research (01/30/2024)
 ----------------------
 1. Python has a library called subprocess, which could be used to run commands. We could use this to run code that the user uploads. 
 2. For instance, if the user uploads a Java file, we could run the command `javac <filename>` to compile the file. Then, we could run the command `java <filename>` to run the file.   
+
+
+Research (02/06/2024)
+----------------------
+1. Working with Abedalah Safi, I will recording and researching while he will be coding as well as researching.
+2. We had an error with running java code in Windows because of how windows treats / in directories. We fixed this by using os.path.join() to join the directory and file name together. 
