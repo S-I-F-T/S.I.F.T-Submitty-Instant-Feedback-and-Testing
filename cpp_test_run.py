@@ -12,7 +12,7 @@ import os
 
 path = os.path.join(r"C:\Users\ahmad\Desktop\OneDrive - Rensselaer Polytechnic Institute\RPI(S24)\intro_rcos\S.I.F.T-Submitty-Instant-Feedback-and-Testing\testing_CPP\hw1.cpp")
 
-cmd = ['g++ -g -Wall -Wextra -o hw1.exe ', path]
+cmd = ['g++ -g -Wall -Wextra -o hw1.exe ', './hw1.cpp']
 
 
 try:
