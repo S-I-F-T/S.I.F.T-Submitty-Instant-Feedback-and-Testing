@@ -1,24 +1,42 @@
-'''
-Autho: Ayaan Ahmad
-
-
-'''
-
-
 import subprocess
-import time
-import exceptiongroup
-import os
 
-path = os.path.join(r"C:\Users\ahmad\Desktop\OneDrive - Rensselaer Polytechnic Institute\RPI(S24)\intro_rcos\S.I.F.T-Submitty-Instant-Feedback-and-Testing\testing_CPP\hw1.cpp")
+def run_cpp_code(cpp_file, args=[]):
+  """
+  Compiles and runs C++ code using the subprocess module.
 
-cmd = ['g++ -g -Wall -Wextra -o hw1.exe ', './hw1.cpp']
+  Args:
+    cpp_file: Path to the C++ source file.
+    args: List of arguments to pass to the executable.
 
+  Returns:
+    The captured output of the C++ program as a string, 
+    or None if an error occurs during compilation or execution.
+  """
 
-try:
-    subprocess.run(cmd)
+  # Compile the C++ code (replace 'g++' with your compiler if necessary)
+  try:
+    subprocess.run(["g++", cpp_file, "-o", "cpp_executable"], check=True)
+    
+  except subprocess.CalledProcessError:
+    print("Error: Compilation failed")
+    return None
 
-except subprocess.CalledProcessError as e:
-    print("Error: ", e)
-    print("Error code: ", e.returncode)
-    print("Error output: ", e.output)
+  # Run the compiled executable
+  try:
+    result = subprocess.run(["./cpp_executable"], capture_output=True, text=True)
+    return result.stdout
+  except subprocess.CalledProcessError as e:
+    print("Error:", e)
+    return None
+
+# Example usage:
+cpp_code_file = "helloworld.cpp"
+arguments = ["arg1", "arg2"]
+
+output = run_cpp_code(cpp_code_file)
+
+if output:
+  print("C++ program output:")
+  print(output)
+else:
+  print("An error occurred while running the C++ code.")
