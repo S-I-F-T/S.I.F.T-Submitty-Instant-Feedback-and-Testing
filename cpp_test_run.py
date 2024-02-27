@@ -23,20 +23,24 @@ def run_cpp_code(cpp_file, args=[]):
 
   # Run the compiled executable
   try:
-    result = subprocess.run(["./cpp_executable"], capture_output=True, text=True)
-    return result.stdout
+    result = subprocess.run(["./cpp_executable"] + args, capture_output=True, text=True)
+    return result.stdout, result.stderr
   except subprocess.CalledProcessError as e:
     print("Error:", e)
     return None
 
 # Example usage:
-cpp_code_file = "helloworld.cpp"
+cpp_code_file = "hw1.cpp"
 arguments = ["arg1", "arg2"]
 
-output = run_cpp_code(cpp_code_file)
+output = run_cpp_code(cpp_code_file, arguments)
 
-if output:
+if output[0]:
   print("C++ program output:")
-  print(output)
+  print(output[0])
+  
+elif output[1]:
+  print(f"An error occurred while running {cpp_code_file}: {output[1]}")
+
 else:
-  print("An error occurred while running the C++ code.")
+  print(f"An error occurred while running {cpp_code_file}: UNKNOWN ERROR!")
