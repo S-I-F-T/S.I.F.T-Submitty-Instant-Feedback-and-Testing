@@ -1,5 +1,17 @@
 import subprocess
 
+def remove_extension(file_name):
+  """
+  Removes the file extension from a file name.
+
+  Args:
+    file_name: The file name to process.
+
+  Returns:
+    The file name with the extension removed.
+  """
+  return file_name[:file_name.rfind(".")]
+
 def run_cpp_code(cpp_file, args=[]):
   """
   Compiles and runs C++ code using the subprocess module.
@@ -31,7 +43,7 @@ def run_cpp_code(cpp_file, args=[]):
 
 # Example usage:
 cpp_code_file = "hw1.cpp"
-arguments = ["arg1", "arg2"]
+arguments = ["gettysburg_address.txt", "out.txt", "4", "flush_right"]
 
 output = run_cpp_code(cpp_code_file, arguments)
 
