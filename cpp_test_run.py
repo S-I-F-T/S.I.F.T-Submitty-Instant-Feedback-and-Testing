@@ -15,7 +15,7 @@ def run_cpp_code(cpp_file, args=[]):
 
   # Compile the C++ code (replace 'g++' with your compiler if necessary)
   try:
-    subprocess.run(["g++", cpp_file, "-o", "cpp_executable"], check=True)
+    subprocess.run(["g++", cpp_file, "-o", "hw1.exe"], check=True)
     
   except subprocess.CalledProcessError:
     print("Error: Compilation failed")
@@ -23,7 +23,7 @@ def run_cpp_code(cpp_file, args=[]):
 
   # Run the compiled executable
   try:
-    result = subprocess.run(["./cpp_executable"] + args, capture_output=True, text=True)
+    result = subprocess.run(["./hw1.exe"] + args, capture_output=True, text=True)
     return result.stdout, result.stderr
   except subprocess.CalledProcessError as e:
     print("Error:", e)
