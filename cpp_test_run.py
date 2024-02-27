@@ -36,7 +36,7 @@ def run_cpp_code(cpp_file, args=[]):
   # Run the compiled executable
   try:
     result = subprocess.run(["./hw1.exe"] + args, capture_output=True, text=True)
-    return result.stdout, result.stderr
+    return result.stdout, result.stderr, result.returncode
   except subprocess.CalledProcessError as e:
     print("Error:", e)
     return None
@@ -54,5 +54,8 @@ if output[0]:
 elif output[1]:
   print(f"An error occurred while running {cpp_code_file}: {output[1]}")
 
-else:
+elif output[2] != 0:
   print(f"An error occurred while running {cpp_code_file}: UNKNOWN ERROR!")
+  
+else:
+  print(f"Successfully ran {cpp_code_file} with no output. Check output file")
