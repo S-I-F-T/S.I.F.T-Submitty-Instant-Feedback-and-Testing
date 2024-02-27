@@ -1,4 +1,5 @@
 import subprocess
+import os
 
 def remove_extension(file_name):
   """
@@ -42,21 +43,31 @@ def run_cpp_code(cpp_file, args=[]):
     return None
   
 if __name__ == "__main__":
+  # Specify the folder structure and executable name
+  folder_structure = ["nested", "subfolder"]
+  executable_name = "hw1.cpp"  # Replace with the actual executable name
+
+  # Construct the full path using os.path.join iteratively
+  script_path = os.path.join(os.getcwd())
+  for folder in folder_structure:
+      script_path = os.path.join(script_path, folder)
+  script_path = os.path.join(script_path, executable_name)
+
   # Example usage:
-  cpp_code_file = "hw1.cpp"
+  # cpp_code_file = "hw1.cpp"
   arguments = ["gettysburg_address.txt", "out.txt", "4", "flush_right"]
 
-  output = run_cpp_code(cpp_code_file, arguments)
+  output = run_cpp_code(script_path, arguments)
 
   if output[0]:
     print("C++ program output:")
     print(output[0])
     
   elif output[1]:
-    print(f"An error occurred while running {cpp_code_file}: {output[1]}")
+    print(f"An error occurred while running {script_path}: {output[1]}")
 
   elif output[2] != 0:
-    print(f"An error occurred while running {cpp_code_file}: UNKNOWN ERROR!")
+    print(f"An error occurred while running {script_path}: UNKNOWN ERROR!")
     
   else:
-    print(f"Successfully ran {cpp_code_file} with no output. Check output file")
+    print(f"Successfully ran {script_path} with no output. Check output file")
