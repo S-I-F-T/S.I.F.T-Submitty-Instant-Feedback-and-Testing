@@ -24,20 +24,21 @@ def run_cpp_code(cpp_file, args=[]):
     The captured output of the C++ program as a string, 
     or None if an error occurs during compilation or execution.
     """
-
+    exec_name = remove_extension(cpp_file) + ".exe"
+    
     # Compile the C++ code (replace 'g++' with your compiler if necessary)
     try:
-        subprocess.run(["g++", cpp_file, "-o", f"{cpp_file}"], check=True)
+        subprocess.run(["g++", cpp_file, "-o", f"{exec_name}"], check=True)
 
     except subprocess.CalledProcessError:
         print("Error: Compilation failed")
         return None
 
-    exec_name = remove_extension(cpp_file) + ".exe"
+   
 
     # Run the compiled executable
     try:
-        result = subprocess.run([f"./{exec_name}.exe"] + args, capture_output=True, text=True)
+        result = subprocess.run([f"./{exec_name}"] + args, capture_output=True, text=True)
         return result.stdout, result.stderr, result.returncode
 
     except subprocess.CalledProcessError as e:
