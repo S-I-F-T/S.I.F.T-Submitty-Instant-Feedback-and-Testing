@@ -9,7 +9,7 @@ def button_function():
     print("button pressed")
 
 # Use CTkButton instead of tkinter Button
-# button = customtkinter.CTkButton(master=root_tk, corner_radius=10, command=button_function)
+button = customtkinter.CTkButton(master=root_tk, corner_radius=10, command=button_function)
 button.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
 
 root_tk.mainloop()
