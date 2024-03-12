@@ -26,3 +26,9 @@ Research (03/12/2024)
 1. Testing with nested CPP files
 
 2. Talks started with frontend team to joing backend with frontend
+
+3. Tested with Python files within the same folder
+
+4. Tested with nested Python files
+
+5. Finalized basic python support
