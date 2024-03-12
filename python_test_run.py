@@ -1,13 +1,10 @@
 import subprocess
 
 # Define the path to the Python file you want to run (replace with your actual path)
-script_path = "nested/subfolder/helloworld.py"
-
-# Option 1: Using subprocess.call (simple execution)
-subprocess.call([script_path])  # Pass the script path as a list
+script_path = "nested/subfolder/hw1.py"
 
 # Option 2: Using subprocess.run (more detailed information)
-result = subprocess.run([script_path], capture_output=True)
+result = subprocess.run(["python3", script_path], capture_output=True)
 
 # Check the return code (0 for success)
 if result.returncode == 0:
