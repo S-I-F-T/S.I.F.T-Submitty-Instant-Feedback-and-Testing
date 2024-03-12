@@ -20,3 +20,9 @@ Research (02/27/2024)
 1. Ran CPP with subprocess module. We used custom arguments as well
 
 2. We can get stdout and sterr
+
+Research (03/12/2024)
+---------------------
+1. Testing with nested CPP files
+
+2. Talks started with frontend team to joing backend with frontend
