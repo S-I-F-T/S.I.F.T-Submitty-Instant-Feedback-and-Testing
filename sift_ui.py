@@ -71,7 +71,7 @@ autograder_button.pack(side=ctk.LEFT, padx = 15)
 
 how_to_button = ctk.CTkButton(master = button_frame_1, text = "How to Use", 
                               font = ctk.CTkFont(family = 'Calibri', size = 15, weight = "bold"),
-                              fg_color="#575757", width = 255, height = 55)
+                              fg_color="#575757", width = 255, height = 55, command = lambda: switch_frame('how_to_frame'))
 
 how_to_button.pack(side=ctk.RIGHT, padx = 15)
 
@@ -87,6 +87,14 @@ settings_button = ctk.CTkButton(master = button_frame_2, text = "Settings",
                                 font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"),
                                 fg_color="#575757", width = 255, height = 55, command = lambda: switch_frame('settings_frame'))
 settings_button.pack(side=ctk.RIGHT, padx = 15)
+
+quit_frame = ctk.CTkFrame(master = welcome_frame, fg_color="#343434", bg_color="#343434")
+quit_frame.pack(pady = 12, padx = 10)
+
+quit_button = ctk.CTkButton(master = quit_frame, text = "Quit",
+                                font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"),
+                                fg_color="#575757", width = 255, height = 55, command = root.quit)
+quit_button.pack(side=ctk.BOTTOM, pady = 10)
 
 # File select page
 file_select_frame = ctk.CTkFrame(master = root, fg_color="#343434", bg_color="#343434")
@@ -222,25 +230,26 @@ how_to_title = ctk.CTkLabel(master = how_to_frame, text = 'How to Use SIFT',
                                 font = ctk.CTkFont(family='Calibri', size=30, weight = "bold"))
 how_to_title.pack(padx=10, pady=10)
 
-ht_description1 = """SIFT allows users to auto-grade their homework
-assignments without fear of wasting submissions
-and waiting for Submitty servers to process code"""
-how_to_paragraph1 = ctk.CTkLabel(master = how_to_frame, text = description1, font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"))
+ht_description1 = """SIFT allows users to auto-grade their homework assignments without
+fear of wasting submissions and waiting for Submitty servers to process code"""
+how_to_paragraph1 = ctk.CTkLabel(master = how_to_frame, text = ht_description1, font = ctk.CTkFont(family='Calibri', size=17, weight = "bold"))
 
 how_to_paragraph1.pack(padx=10, pady=5)
 
-description2 = """To use SIFT, navigate to the Autograder page and
-input your own code, as well as the expected output
-files for the assignment
-    Once you press the “Compare Output” button,
-SIFT will run your code and compare it against the
-expected output files provided
-The comparison will highlight discrepancies between
-the output of the provided code and the expected 
-output for easy bug finding and fixing"""
-paragraph2 = ctk.CTkLabel(master = how_to_frame, text=description2, font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"))
+ht_description2 = """To use SIFT, navigate to the Autograder page and input your own code, as well as 
+the expected output files for the assignment. Once you press the “Compare Output”
+button, SIFT will run your code and compare it against the expected output files 
+provided. The comparison will highlight discrepancies between the output of the 
+provided code and the expected output for easy bug finding and fixing"""
+paragraph2 = ctk.CTkLabel(master = how_to_frame, text=ht_description2, font = ctk.CTkFont(family='Calibri', size=17, weight = "bold"))
 
-# paragraph2.pack(padx=10, pady=10)
+paragraph2.pack(padx=10, pady=10)
+
+how_to_back_button = ctk.CTkButton(master = how_to_frame, text = "Back",
+                                        font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"),
+                                        fg_color="#575757", width = 100, height = 40, 
+                                        command = lambda: switch_frame('welcome_frame'))
+how_to_back_button.pack(side=ctk.BOTTOM, pady = 10)
 
 
 # Pack the welcome frame
