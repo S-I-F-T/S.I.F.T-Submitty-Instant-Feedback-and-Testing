@@ -2,10 +2,21 @@ import customtkinter as ctk
 from customtkinter import filedialog    
 
 def select_user_file(user_files):
+        """
+        @param user_files: list of user files
+        
+        This function allows the user to select their file(s) 
+        and appends the file path to the user_files list.
+        """
         filename = filedialog.askopenfilename()
         user_files.append(filename)
 
 def select_expected_file(expected_files):
+        """
+        @param expected_files: list of expected files
+        
+        This function allows the user to select the expected output file(s)
+        """
         filename = filedialog.askopenfilename()
         expected_files.append(filename)
 
@@ -18,6 +29,11 @@ root.configure(bg="#343434")
 
 # Function to switch between frames
 def switch_frame(frame_name):
+    """
+    @param frame_name: name of the frame to switch to
+    
+    This function switches between frames in the UI.
+    """
     global current_frame
     if current_frame != frame_name:
         # Get the frame objects using their names
@@ -56,6 +72,7 @@ autograder_button.pack(side=ctk.LEFT, padx = 15)
 how_to_button = ctk.CTkButton(master = button_frame_1, text = "How to Use", 
                               font = ctk.CTkFont(family = 'Calibri', size = 15, weight = "bold"),
                               fg_color="#575757", width = 255, height = 55)
+
 how_to_button.pack(side=ctk.RIGHT, padx = 15)
 
 button_frame_2 = ctk.CTkFrame(master= welcome_frame, fg_color="#343434", bg_color="#343434")
@@ -155,7 +172,7 @@ settings_theme_frame.pack(pady = 12, padx = 10)
 
 settings_theme_label = ctk.CTkLabel(master = settings_theme_frame, text = 'Theme:',
                                     font = ctk.CTkFont(family='Calibri', size=20, weight = "bold"))
-settings_theme_label.pack(side=ctk.LEFT, padx = 50)
+settings_theme_label.pack(side=ctk.LEFT, padx = 60)
 
 settings_theme_dropdown = ctk.CTkOptionMenu(master = settings_theme_frame, values = ['Dark', 'Light'],
                                             font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"))
