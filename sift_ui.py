@@ -72,6 +72,7 @@ autograder_button.pack(side=ctk.LEFT, padx = 15)
 how_to_button = ctk.CTkButton(master = button_frame_1, text = "How to Use", 
                               font = ctk.CTkFont(family = 'Calibri', size = 15, weight = "bold"),
                               fg_color="#575757", width = 255, height = 55)
+
 how_to_button.pack(side=ctk.RIGHT, padx = 15)
 
 button_frame_2 = ctk.CTkFrame(master= welcome_frame, fg_color="#343434", bg_color="#343434")
@@ -171,7 +172,7 @@ settings_theme_frame.pack(pady = 12, padx = 10)
 
 settings_theme_label = ctk.CTkLabel(master = settings_theme_frame, text = 'Theme:',
                                     font = ctk.CTkFont(family='Calibri', size=20, weight = "bold"))
-settings_theme_label.pack(side=ctk.LEFT, padx = 50)
+settings_theme_label.pack(side=ctk.LEFT, padx = 60)
 
 settings_theme_dropdown = ctk.CTkOptionMenu(master = settings_theme_frame, values = ['Dark', 'Light'],
                                             font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"))
