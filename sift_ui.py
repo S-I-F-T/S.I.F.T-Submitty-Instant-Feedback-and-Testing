@@ -2,10 +2,21 @@ import customtkinter as ctk
 from customtkinter import filedialog    
 
 def select_user_file(user_files):
+        """
+        @param user_files: list of user files
+        
+        This function allows the user to select their file(s) 
+        and appends the file path to the user_files list.
+        """
         filename = filedialog.askopenfilename()
         user_files.append(filename)
 
 def select_expected_file(expected_files):
+        """
+        @param expected_files: list of expected files
+        
+        This function allows the user to select the expected output file(s)
+        """
         filename = filedialog.askopenfilename()
         expected_files.append(filename)
 
@@ -18,6 +29,11 @@ root.configure(bg="#343434")
 
 # Function to switch between frames
 def switch_frame(frame_name):
+    """
+    @param frame_name: name of the frame to switch to
+    
+    This function switches between frames in the UI.
+    """
     global current_frame
     if current_frame != frame_name:
         # Get the frame objects using their names
