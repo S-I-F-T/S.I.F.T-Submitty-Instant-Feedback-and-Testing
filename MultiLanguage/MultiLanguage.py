@@ -1,10 +1,9 @@
 import csv
-# import json
+import json
 
 print("Hello")
 
-with open('test.csv', 'r') as csv_file:
-  settings = csv.reader(csv_file)
+with open('MultiLanguage/sifttings.json', 'r') as csv_file:
+  settings = json.load(csv_file)
   
-  for line in settings:
-    print(line)
+  print(settings)

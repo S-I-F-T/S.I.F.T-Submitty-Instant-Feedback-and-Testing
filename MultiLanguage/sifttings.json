@@ -1,12 +1,4 @@
 {
-  "students": [
-    {
-      "id": 1,
-      "name": "Tim"
-    },
-    {
-      "id": 2,
-      "name": "Joe"
-    }
-  ]
+  "language": "Python",
+  "theme": "Dark"
 }
