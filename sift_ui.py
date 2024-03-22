@@ -99,8 +99,15 @@ quit_button.pack(side=ctk.BOTTOM, pady = 10)
 # File select page
 file_select_frame = ctk.CTkFrame(master = root, fg_color="#343434", bg_color="#343434")
 
+file_select_big_title_frame = ctk.CTkFrame(master = file_select_frame, fg_color="#343434", bg_color="#343434")
+file_select_big_title_frame.pack(pady = 12, padx = 10)
+
+file_select_big_title = ctk.CTkLabel(master = file_select_big_title_frame, text = 'File select',
+                                          font = ctk.CTkFont(family='Calibri', size=30, weight = "bold"))
+file_select_big_title.pack(pady = 0, padx = 10)
+
 file_select_title_frame = ctk.CTkFrame(master = file_select_frame, fg_color="#343434", bg_color="#343434")
-file_select_title_frame.pack(pady = 12, padx = 10)
+file_select_title_frame.pack(pady = 0, padx = 10)
 
 your_files_title = ctk.CTkLabel(master = file_select_title_frame, text = 'Your file(s)', font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"))
 your_files_title.pack(side=ctk.LEFT, padx = 50)
@@ -113,12 +120,14 @@ file_select_choose_frame.pack(pady = 12, padx = 10)
 
 your_files_button = ctk.CTkButton(master = file_select_choose_frame, text = "Select your file(s)", 
                                   font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"),
-                                  fg_color="#575757", width = 255, height = 55, command = select_user_file)
+                                  fg_color="#575757", width = 255, height = 55, command = lambda: select_user_file(userfiles))
 your_files_button.pack(side=ctk.LEFT, padx = 15)
+
+
 
 expected_files_button = ctk.CTkButton(master = file_select_choose_frame, text = "Select expected output file(s)",
                                         font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"),
-                                        fg_color="#575757", width = 255, height = 55, command = select_expected_file)
+                                        fg_color="#575757", width = 255, height = 55, command = lambda: select_expected_file(expectedfiles))
 expected_files_button.pack(side=ctk.RIGHT, padx = 15)
 
 file_select_back_button = ctk.CTkButton(master = file_select_frame, text = "Back", 
