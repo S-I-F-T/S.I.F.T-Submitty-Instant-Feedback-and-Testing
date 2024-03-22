@@ -8,7 +8,10 @@ def select_user_file(user_files):
         This function allows the user to select their file(s) 
         and appends the file path to the user_files list.
         """
-        filename = filedialog.askopenfilename()
+        file_types = [("Python Files", "*.py"), 
+                  ("Java Files", "*.java"), 
+                  ("C++ Files", "*.cpp")]
+        filename = filedialog.askopenfilename(filetypes=file_types)
         user_files.append(filename)
 
 def select_expected_file(expected_files):
