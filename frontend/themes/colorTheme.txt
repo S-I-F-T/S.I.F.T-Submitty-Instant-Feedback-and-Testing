@@ -1,1 +1,2 @@
 ./frontend/themes/green.json
+Green

@@ -20,8 +20,31 @@ def select_expected_file(expected_files):
         filename = filedialog.askopenfilename()
         expected_files.append(filename)
 
+
+def change_theme(newColorTheme):
+      print(newColorTheme + " IS the new theme")
+      newColorFilePath = ""
+      if(newColorTheme == 'Red'):
+        newColorFilePath = "./frontend/themes/red.json"
+      elif( newColorTheme == 'Green'):
+        newColorFilePath = "./frontend/themes/green.json"
+      
+      themeFile = open("frontend/themes/colorTheme.txt", 'w')
+      themeFile.write(newColorFilePath + "\n" + newColorTheme)
+      themeFile.close()
+
+      ctk.set_default_color_theme(newColorFilePath)
+
+
+
+#read color theme file to get theme
+themeFile = open("frontend/themes/colorTheme.txt", 'r')
+colorThemeFile = themeFile.readline().strip()
+colorTheme = themeFile.readline()
+themeFile.close()
+
 ctk.set_appearance_mode('dark')
-ctk.set_default_color_theme('./frontend/themes/green.json')
+ctk.set_default_color_theme(colorThemeFile)
 
 root = ctk.CTk()
 root.geometry('640x480')
@@ -182,8 +205,10 @@ settings_theme_label = ctk.CTkLabel(master = settings_theme_frame, text = 'Theme
                                     font = ctk.CTkFont(family='Calibri', size=20, weight = "bold"))
 settings_theme_label.pack(side=ctk.LEFT, padx = 60)
 
-settings_theme_dropdown = ctk.CTkOptionMenu(master = settings_theme_frame, values = ['Dark', 'Light'],
-                                            font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"))
+
+settings_theme_dropdown = ctk.CTkOptionMenu(master = settings_theme_frame, values = ['Colors','Dark', 'Light','Green', 'Red'],
+                                            font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"),
+                                             command=change_theme)
 settings_theme_dropdown.pack(side=ctk.RIGHT, padx = 150)
 
 settings_back_button = ctk.CTkButton(master = settings_frame, text = "Back",
