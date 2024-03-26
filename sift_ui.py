@@ -1,5 +1,5 @@
 import customtkinter as ctk
-from customtkinter import filedialog    
+from customtkinter import filedialog
 
 def select_user_file(user_files):
         """
@@ -13,22 +13,25 @@ def select_user_file(user_files):
                   ("C++ Files", "*.cpp")]
         filename = filedialog.askopenfilename(filetypes=file_types)
         user_files.append(filename)
-
-def select_expected_file(expected_files):
-        """
-        @param expected_files: list of expected files
         
-        This function allows the user to select the expected output file(s)
-        """
-        filename = filedialog.askopenfilename()
-        expected_files.append(filename)
+        # Update user files label
+        user_files_text = "\n".join(userfiles) if userfiles else "No files selected"
+        your_files.configure(text=user_files_text)
 
-ctk.set_appearance_mode('dark')
-ctk.set_default_color_theme('dark-blue')
 
-root = ctk.CTk()
-root.geometry('640x480')
-root.configure(bg="#343434")
+    
+def select_expected_file(expected_files):
+    """
+    @param expected_files: list of expected files
+    
+    This function allows the user to select the expected output file(s)
+    """
+    filename = filedialog.askopenfilename()
+    expected_files.append(filename)
+
+    # Update expected files label
+    expected_files_text = "\n".join(expectedfiles) if expectedfiles else "No files selected"
+    expected_files_label.configure(text=expected_files_text)
 
 # Function to switch between frames
 def switch_frame(frame_name):
@@ -50,6 +53,13 @@ def switch_frame(frame_name):
         new_frame_obj.pack(fill='both', expand=True)
 
         current_frame = frame_name
+
+ctk.set_appearance_mode('dark')
+ctk.set_default_color_theme('dark-blue')
+
+root = ctk.CTk()
+root.geometry('640x480')
+root.configure(bg="#343434")
 
 userfiles = []
 expectedfiles = []
@@ -126,12 +136,22 @@ your_files_button = ctk.CTkButton(master = file_select_choose_frame, text = "Sel
                                   fg_color="#575757", width = 255, height = 55, command = lambda: select_user_file(userfiles))
 your_files_button.pack(side=ctk.LEFT, padx = 15)
 
-
-
 expected_files_button = ctk.CTkButton(master = file_select_choose_frame, text = "Select expected output file(s)",
                                         font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"),
                                         fg_color="#575757", width = 255, height = 55, command = lambda: select_expected_file(expectedfiles))
 expected_files_button.pack(side=ctk.RIGHT, padx = 15)
+
+your_files_frame = ctk.CTkFrame(master = file_select_frame, fg_color="#343434", bg_color="#343434")
+your_files_frame.pack(pady = 12, padx = 30, side = ctk.LEFT)
+
+your_files = ctk.CTkLabel(master = your_files_frame, text = 'No files selected', font = ctk.CTkFont(family='Calibri', size=12))
+your_files.pack(pady = 5)
+
+expected_files_frame = ctk.CTkFrame(master = file_select_frame, fg_color="#343434", bg_color="#343434")
+expected_files_frame.pack(pady = 12, padx = 10, side = ctk.RIGHT)
+
+expected_files_label = ctk.CTkLabel(master = expected_files_frame, text = 'No files selected', font = ctk.CTkFont(family='Calibri', size=12))
+expected_files_label.pack(pady = 5)
 
 file_select_back_button = ctk.CTkButton(master = file_select_frame, text = "Back", 
                                        font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"), 
@@ -262,7 +282,6 @@ how_to_back_button = ctk.CTkButton(master = how_to_frame, text = "Back",
                                         fg_color="#575757", width = 100, height = 40, 
                                         command = lambda: switch_frame('welcome_frame'))
 how_to_back_button.pack(side=ctk.BOTTOM, pady = 10)
-
 
 # Pack the welcome frame
 welcome_frame.pack(fill = 'both', expand = True)
