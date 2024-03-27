@@ -1,25 +1,25 @@
 import customtkinter as ctk
 from customtkinter import filedialog
+from cpp_test_tkinter import run_cpp_code, write_output_to_file
+
 
 def select_user_file(user_files):
-        """
-        @param user_files: list of user files
-        
-        This function allows the user to select their file(s) 
-        and appends the file path to the user_files list.
-        """
-        file_types = [("Python Files", "*.py"), 
-                  ("Java Files", "*.java"), 
-                  ("C++ Files", "*.cpp")]
-        filename = filedialog.askopenfilename(filetypes=file_types)
-        user_files.append(filename)
-        
-        # Update user files label
-        user_files_text = "\n".join(userfiles) if userfiles else "No files selected"
-        your_files.configure(text=user_files_text)
-
-
+    """
+    @param user_files: list of user files
     
+    This function allows the user to select their file(s) 
+    and appends the file path to the user_files list.
+    """
+    file_types = [("Python Files", "*.py"), 
+                ("Java Files", "*.java"), 
+                ("C++ Files", "*.cpp")]
+    filename = filedialog.askopenfilename(filetypes=file_types)
+    user_files.append(filename)
+    
+    # Update user files label
+    user_files_text = "\n".join(userfiles) if userfiles else "No files selected"
+    your_files.configure(text=user_files_text)
+
 def select_expected_file(expected_files):
     """
     @param expected_files: list of expected files
@@ -32,6 +32,31 @@ def select_expected_file(expected_files):
     # Update expected files label
     expected_files_text = "\n".join(expectedfiles) if expectedfiles else "No files selected"
     expected_files_label.configure(text=expected_files_text)
+def run_cpp_userfiles(user_files):
+    """
+    @param user_files: list of user files
+    
+    This function runs the user's C++ code and takes user to Compare Page where the output is displayed.
+    """
+    # Run the user's C++ code
+    output = run_cpp_code(user_files[0])
+    
+    # Write the output to a file
+    write_output_to_file(output, "user_output.txt")
+    
+    # Open new frame to compare output
+    switch_frame('comparison_frame')
+    
+    # Update labels in comparison frame with output
+    your_output_text = output if output else "No output generated"
+    your_output_label.configure(text=your_output_text)
+    expected_output_text = ""  # You need to fetch expected output from the file and set it here
+    expected_output_label.configure(text=expected_output_text)
+
+    
+    
+    
+    
 
 # Function to switch between frames
 def switch_frame(frame_name):
