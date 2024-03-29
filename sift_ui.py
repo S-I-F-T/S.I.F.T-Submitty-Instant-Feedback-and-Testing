@@ -1,7 +1,18 @@
 import customtkinter as ctk
+import os
 from customtkinter import filedialog
 from cpp_test_tkinter import run_cpp_code, write_output_to_file
 
+
+# Need a function make it so the file paths are relative to the current directory
+# This is because the file paths are not the same on different machines
+def change_file_path(file_path):
+    """
+    @param file_path: file path to change
+    
+    This function changes the file path to be relative to the current directory.
+    """
+    return os.path.join(os.path.dirname(__file__), file_path)
 
 def select_user_file(user_files):
     """
@@ -32,30 +43,48 @@ def select_expected_file(expected_files):
     # Update expected files label
     expected_files_text = "\n".join(expectedfiles) if expectedfiles else "No files selected"
     expected_files_label.configure(text=expected_files_text)
+    
 def run_cpp_userfiles(user_files):
     """
     @param user_files: list of user files
     
     This function runs the user's C++ code and takes user to Compare Page where the output is displayed.
     """
+    
+    # if the file is not a C++ file, return an error
+    if not user_files[0].endswith('.cpp'):
+        
+    
     # Run the user's C++ code
     output = run_cpp_code(user_files[0])
+    output_to_write = ""
     
-    # Write the output to a file
-    write_output_to_file(output, "user_output.txt")
+    if output is None:
+        output_to_write = "Error: Compilation failed"
+    
+    elif output[0]:
+        output_to_write = output[0]
+    
+    elif output[1]:
+        output_to_write = output[1]
+    
+    write_output_to_file(output_to_write, 'user_output.txt')
+    
+    display_output(output_to_write)
     
     # Open new frame to compare output
     switch_frame('comparison_frame')
     
-    # Update labels in comparison frame with output
-    your_output_text = output if output else "No output generated"
-    your_output_label.configure(text=your_output_text)
-    expected_output_text = ""  # You need to fetch expected output from the file and set it here
-    expected_output_label.configure(text=expected_output_text)
+    
 
+def display_output(output):
+    """
+    @param output: Output to be displayed
     
-    
-    
+    This function displays the output in the Comparison frame.
+    """
+    # Update the label in the Comparison frame to display the output
+    output_label.configure(text=output)
     
 
 # Function to switch between frames
@@ -186,7 +215,7 @@ file_select_back_button.pack(side=ctk.BOTTOM, pady = 10)
 
 file_select_compare_button = ctk.CTkButton(master = file_select_frame, text = "Compare",
                                             font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"),
-                                            fg_color="#575757", width = 100, height = 40, command= lambda: switch_frame('comparison_frame'))
+                                            fg_color="#575757", width = 100, height = 40, command= lambda: run_cpp_userfiles(userfiles))
 file_select_compare_button.pack(side=ctk.BOTTOM, pady = 10)
 
 # Comparison page
@@ -213,6 +242,9 @@ comparison_back_button = ctk.CTkButton(master = comparison_frame, text = "Back",
                                        fg_color="#575757", width = 100, height = 40, 
                                        command = lambda: switch_frame('file_select_frame'))
 comparison_back_button.pack(side=ctk.BOTTOM, pady = 10)
+
+output_label = ctk.CTkLabel(master=comparison_frame, text='', font=ctk.CTkFont(family='Calibri', size=15))
+output_label.pack(pady=5)
 
 # Settings page
 settings_frame = ctk.CTkFrame(master = root, fg_color="#343434", bg_color="#343434")

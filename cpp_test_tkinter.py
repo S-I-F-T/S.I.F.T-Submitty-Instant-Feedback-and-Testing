@@ -36,9 +36,7 @@ def run_cpp_code(cpp_file, args=[]):
     Returns:
         The captured output of the C++ program as a string, 
         or None if an error occurs during compilation or execution.
-    """
-
-
+    """    
 
     # Compile the C++ code (replace 'g++' with your compiler if necessary)
     try:
@@ -52,6 +50,7 @@ def run_cpp_code(cpp_file, args=[]):
     # Run the compiled executable
     try:
         result = subprocess.run(["./hw1.exe"] + args, capture_output=True, text=True)
+        
         return result.stdout, result.stderr, result.returncode
     
     except subprocess.CalledProcessError as e:
