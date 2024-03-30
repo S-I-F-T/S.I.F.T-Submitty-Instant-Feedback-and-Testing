@@ -22,6 +22,7 @@ def select_expected_file(expected_files):
     This function allows the user to select the expected output file(s)
     """
     filename = filedialog.askopenfilename()
+    # If the filename is nothing, don't add it
     expected_files.append(filename)
 
     # Update expected files label
@@ -136,17 +137,20 @@ expected_files_button = ctk.CTkButton(master = file_select_choose_frame, text = 
                                         fg_color="#575757", width = 255, height = 55, command = lambda: select_expected_file(expectedfiles))
 expected_files_button.pack(side=ctk.RIGHT, padx = 15)
 
-your_files_frame = ctk.CTkFrame(master = file_select_frame, fg_color="#343434", bg_color="#343434")
-your_files_frame.pack(pady = 12, padx = 30, side = ctk.LEFT)
+file_display_frame = ctk.CTkFrame(master = file_select_frame, fg_color="#343434", bg_color="#343434")
+file_display_frame.pack(pady = 12, padx = 10)
 
-your_files = ctk.CTkLabel(master = your_files_frame, text = 'No files selected', font = ctk.CTkFont(family='Calibri', size=12))
-your_files.pack(pady = 5)
+user_file_display_frame = ctk.CTkFrame(master = file_display_frame, fg_color="#343434", bg_color="#343434")
+user_file_display_frame.pack(side = ctk.LEFT)
 
-expected_files_frame = ctk.CTkFrame(master = file_select_frame, fg_color="#343434", bg_color="#343434")
-expected_files_frame.pack(pady = 12, padx = 10, side = ctk.RIGHT)
+your_files = ctk.CTkLabel(master = user_file_display_frame, text = 'No files selected', font = ctk.CTkFont(family='Calibri', size=12))
+your_files.pack(padx = 50)
 
-expected_files_label = ctk.CTkLabel(master = expected_files_frame, text = 'No files selected', font = ctk.CTkFont(family='Calibri', size=12))
-expected_files_label.pack(pady = 5)
+ex_file_display_frame = ctk.CTkFrame(master = file_display_frame, fg_color="#343434", bg_color="#343434")
+ex_file_display_frame.pack(side = ctk.RIGHT)
+
+expected_files_label = ctk.CTkLabel(master = ex_file_display_frame, text = 'No files selected', font = ctk.CTkFont(family='Calibri', size=12))
+expected_files_label.pack(padx = 50)
 
 file_select_back_button = ctk.CTkButton(master = file_select_frame, text = "Back", 
                                        font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"), 
