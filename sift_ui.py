@@ -1,5 +1,5 @@
 import customtkinter as ctk
-from customtkinter import filedialog    
+from customtkinter import filedialog
 
 def select_user_file(user_files):
         """
@@ -28,7 +28,10 @@ def change_theme(newColorTheme):
         newColorFilePath = "./frontend/themes/red.json"
       elif( newColorTheme == 'Green'):
         newColorFilePath = "./frontend/themes/green.json"
-      
+      elif( newColorTheme == 'Dark'):
+        newColorFilePath = 'dark-blue'
+      elif( newColorTheme == 'Light'):
+        newColorFilePath = 'blue'
       themeFile = open("frontend/themes/colorTheme.txt", 'w')
       themeFile.write(newColorFilePath + "\n" + newColorTheme)
       themeFile.close()
