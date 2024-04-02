@@ -41,15 +41,16 @@ def run_cpp_code(cpp_file, args=[]):
     # Compile the C++ code (replace 'g++' with your compiler if necessary)
     try:
         exe_name = remove_extension(cpp_file) + ".exe"
+        print(cpp_file)
         subprocess.run(["g++", cpp_file, "-o", exe_name], check=True)
         
-    except subprocess.CalledProcessError:
-        print("Error: Compilation failed")
+    except subprocess.CalledProcessError or FileNotFoundError as e:
+        print(f"Error: Compilation failed: {e}")
         return None
 
     # Run the compiled executable
     try:
-        result = subprocess.run(["./hw1.exe"] + args, capture_output=True, text=True)
+        result = subprocess.run([exe_name] + args, cwd=os.path.dirname(cpp_file), capture_output=True, text=True)
         
         return result.stdout, result.stderr, result.returncode
     
@@ -58,4 +59,20 @@ def run_cpp_code(cpp_file, args=[]):
         return None
     
     
+def main():
+    folder_structure = ["test"]
+    cpp_file = "helloworld.cpp"
     
+    # Construct the full path using os.path.join iteratively
+    script_path = os.getcwd()
+    for folder in folder_structure:
+        script_path = os.path.join(script_path, folder)
+        
+    script_path = os.path.join(script_path, cpp_file)
+    print('HERE IS WHAT IM DOING')
+    print(script_path)
+    
+    run_cpp_code(script_path)
+
+
+main()
