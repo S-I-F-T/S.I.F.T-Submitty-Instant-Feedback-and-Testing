@@ -3,7 +3,6 @@ import os
 from customtkinter import filedialog
 from cpp_test_tkinter import run_cpp_code, write_output_to_file
 
-
 # Need a function make it so the file paths are relative to the current directory
 # This is because the file paths are not the same on different machines
 def change_file_path(file_path):
@@ -12,7 +11,7 @@ def change_file_path(file_path):
     
     This function changes the file path to be relative to the current directory.
     """
-    return os.path.join(os.path.dirname(__file__), file_path)
+    return os.path.abspath(os.path.join(os.path.dirname(__file__), file_path))
 
 def select_user_file(user_files):
     """
@@ -25,10 +24,11 @@ def select_user_file(user_files):
                 ("Java Files", "*.java"), 
                 ("C++ Files", "*.cpp")]
     filename = filedialog.askopenfilename(filetypes=file_types)
-    user_files.append(filename)
+    if filename:
+        user_files.append(change_file_path(filename))
     
     # Update user files label
-    user_files_text = "\n".join(userfiles) if userfiles else "No files selected"
+    user_files_text = "\n".join(user_files) if user_files else "No files selected"
     your_files.configure(text=user_files_text)
 
 def select_expected_file(expected_files):
@@ -38,10 +38,11 @@ def select_expected_file(expected_files):
     This function allows the user to select the expected output file(s)
     """
     filename = filedialog.askopenfilename()
-    expected_files.append(filename)
+    if filename:
+        expected_files.append(change_file_path(filename))
 
     # Update expected files label
-    expected_files_text = "\n".join(expectedfiles) if expectedfiles else "No files selected"
+    expected_files_text = "\n".join(expected_files) if expected_files else "No files selected"
     expected_files_label.configure(text=expected_files_text)
     
 def run_cpp_userfiles(user_files):
@@ -53,9 +54,18 @@ def run_cpp_userfiles(user_files):
     
     # if the file is not a C++ file, return an error
     if not user_files[0].endswith('.cpp'):
-        
+        return "Error: File is not a C++ file"
     
-    # Run the user's C++ code
+    # Make sure all file paths are relative
+    user_files = [change_file_path(file) for file in user_files]
+    
+    for file in user_files:
+        print(file)
+        print("\n\n\n")
+        if not os.path.exists(file):
+            return "Error: File does not exist"
+        
+        
     output = run_cpp_code(user_files[0])
     output_to_write = ""
     
@@ -74,8 +84,6 @@ def run_cpp_userfiles(user_files):
     
     # Open new frame to compare output
     switch_frame('comparison_frame')
-    
-    
 
 def display_output(output):
     """
