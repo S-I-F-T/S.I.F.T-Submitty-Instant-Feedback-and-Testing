@@ -58,8 +58,8 @@ def run_cpp_code(cpp_file, args=[]):
   
 def main():
   # Specify the folder structure and executable name
-  folder_structure = ["nested", "subfolder"]
-  executable_name = "hw1.cpp"  # Replace with the actual executable name
+  folder_structure = ["test"]
+  executable_name = "helloword.cpp"
 
   # Construct the full path using os.path.join iteratively
   script_path = os.path.join(os.getcwd())
@@ -68,10 +68,10 @@ def main():
       script_path = os.path.join(script_path, folder)
       
   script_path = os.path.join(script_path, executable_name)
-
+  print(script_path)
   # Example usage:
   # cpp_code_file = "hw1.cpp"
-  arguments = ["gettysburg_address.txt", "out.txt", "4", "flush_right"]  
+  arguments = []  
   
   output = run_cpp_code(script_path, arguments)
   if output:

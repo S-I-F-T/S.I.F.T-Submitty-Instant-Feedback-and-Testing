@@ -2,16 +2,15 @@ import customtkinter as ctk
 import os
 from customtkinter import filedialog
 from cpp_test_tkinter import run_cpp_code, write_output_to_file
+from pathlib import Path
 
-# Need a function make it so the file paths are relative to the current directory
-# This is because the file paths are not the same on different machines
 def change_file_path(file_path):
     """
     @param file_path: file path to change
     
     This function changes the file path to be relative to the current directory.
     """
-    return os.path.abspath(os.path.join(os.path.dirname(__file__), file_path))
+    return str(Path(file_path).resolve().relative_to(Path.cwd()))
 
 def select_user_file(user_files):
     """
