@@ -38,7 +38,7 @@ def run_cpp_code(cpp_file, args=[]):
         or None if an error occurs during compilation or execution.
     """    
 
-    # Compile the C++ code (replace 'g++' with your compiler if necessary)
+    # Compile the C++ code
     try:
         exe_name = remove_extension(cpp_file) + ".exe"
         subprocess.run(["g++", str(cpp_file), "-o", str(exe_name)], check=True)
@@ -49,12 +49,13 @@ def run_cpp_code(cpp_file, args=[]):
 
     # Run the compiled executable
     try:
-        result = subprocess.run([str(exe_name)] + args, capture_output=True, text=True)
+        result = subprocess.run([str(exe_name)] + args, cwd=Path.cwd(), capture_output=True, text=True)
         return result.stdout, result.stderr, result.returncode
     
     except subprocess.CalledProcessError as e:
         print("Error:", e)
         return None
+
 
     
     
