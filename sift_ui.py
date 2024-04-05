@@ -2,6 +2,7 @@ import customtkinter as ctk
 import os
 from customtkinter import filedialog
 from cpp_test_tkinter import run_cpp_code, write_output_to_file
+from backend.MultiLanguage import MultiLanguage
 from pathlib import Path
 
 def change_file_path(file_path):
@@ -65,7 +66,8 @@ def run_cpp_userfiles(user_files):
             return "Error: File does not exist"
         
         
-    output = run_cpp_code(user_files[0])
+    MultiLanguage.run_cpp_file(user_files[0])
+    output = None
     output_to_write = ""
     
     if output is None:
@@ -77,7 +79,7 @@ def run_cpp_userfiles(user_files):
     elif output[1]:
         output_to_write = output[1]
     
-    write_output_to_file(output_to_write, 'user_output.txt')
+    # write_output_to_file(output_to_write, 'user_output.txt')
     
     display_output(output_to_write)
     
