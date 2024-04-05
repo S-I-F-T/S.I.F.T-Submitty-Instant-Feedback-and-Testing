@@ -1,5 +1,7 @@
 import customtkinter as ctk
 from customtkinter import filedialog
+import sys
+import os
 
 def select_user_file(user_files):
         """
@@ -22,7 +24,7 @@ def select_expected_file(expected_files):
 
 
 def change_theme(newColorTheme):
-      print(newColorTheme + " IS the new theme")
+      print(newColorTheme + " Is the new theme")
       newColorFilePath = ""
       if(newColorTheme == 'Red'):
         newColorFilePath = "./frontend/themes/red.json"
@@ -32,11 +34,16 @@ def change_theme(newColorTheme):
         newColorFilePath = 'dark-blue'
       elif( newColorTheme == 'Light'):
         newColorFilePath = 'blue'
+      elif( newColorTheme == 'Pink'):
+        newColorFilePath = "./frontend/themes/pink.json"
+      elif( newColorTheme == 'Colors'):
+          return
       themeFile = open("frontend/themes/colorTheme.txt", 'w')
       themeFile.write(newColorFilePath + "\n" + newColorTheme)
       themeFile.close()
-
-      ctk.set_default_color_theme(newColorFilePath)
+      python = sys.executable
+      os.execl(python, python, *sys.argv)
+      # ctk.set_default_color_theme(newColorFilePath)
 
 
 
@@ -209,7 +216,7 @@ settings_theme_label = ctk.CTkLabel(master = settings_theme_frame, text = 'Theme
 settings_theme_label.pack(side=ctk.LEFT, padx = 60)
 
 
-settings_theme_dropdown = ctk.CTkOptionMenu(master = settings_theme_frame, values = ['Colors','Dark', 'Light','Green', 'Red'],
+settings_theme_dropdown = ctk.CTkOptionMenu(master = settings_theme_frame, values = ['Colors','Dark', 'Light','Green', 'Red', 'Pink'],
                                             font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"),
                                              command=change_theme)
 settings_theme_dropdown.pack(side=ctk.RIGHT, padx = 150)

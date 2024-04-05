@@ -1,2 +1,2 @@
-./frontend/themes/red.json
-Red
+./frontend/themes/green.json
+Green
