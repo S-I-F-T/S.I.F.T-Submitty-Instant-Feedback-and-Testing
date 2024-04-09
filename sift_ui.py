@@ -1,7 +1,6 @@
 import customtkinter as ctk
 import os
 from customtkinter import filedialog
-from cpp_test_tkinter import run_cpp_code, write_output_to_file
 from backend.MultiLanguage import MultiLanguage
 from pathlib import Path
 
@@ -31,6 +30,10 @@ def select_user_file(user_files):
     user_files_text = "\n".join(user_files) if user_files else "No files selected"
     your_files.configure(text=user_files_text)
 
+def run_user_files(user_files):
+    if (MultiLanguage.language == "c++"):
+        run_cpp_userfiles(user_files);
+
 def select_expected_file(expected_files):
     """
     @param expected_files: list of expected files
@@ -52,39 +55,39 @@ def run_cpp_userfiles(user_files):
     This function runs the user's C++ code and takes user to Compare Page where the output is displayed.
     """
     
-    # if the file is not a C++ file, return an error
-    if not user_files[0].endswith('.cpp'):
-        return "Error: File is not a C++ file"
+    # # if the file is not a C++ file, return an error
+    # if not user_files[0].endswith('.cpp'):
+    #     return "Error: File is not a C++ file"
     
-    # Make sure all file paths are relative
-    user_files = [change_file_path(file) for file in user_files]
+    # # Make sure all file paths are relative
+    # user_files = [change_file_path(file) for file in user_files]
     
-    for file in user_files:
-        print(file)
-        print("\n\n\n")
-        if not os.path.exists(file):
-            return "Error: File does not exist"
+    # for file in user_files:
+    #     print(file)
+    #     print("\n\n\n")
+    #     if not os.path.exists(file):
+    #         return "Error: File does not exist"
         
         
     MultiLanguage.run_cpp_file(user_files[0])
     output = None
     output_to_write = ""
     
-    if output is None:
-        output_to_write = "Error: Compilation failed"
+    # if output is None:
+    #     output_to_write = "Error: Compilation failed"
     
-    elif output[0]:
-        output_to_write = output[0]
+    # elif output[0]:
+    #     output_to_write = output[0]
     
-    elif output[1]:
-        output_to_write = output[1]
+    # elif output[1]:
+    #     output_to_write = output[1]
     
-    # write_output_to_file(output_to_write, 'user_output.txt')
+    # # write_output_to_file(output_to_write, 'user_output.txt')
     
-    display_output(output_to_write)
+    # display_output(output_to_write)
     
-    # Open new frame to compare output
-    switch_frame('comparison_frame')
+    # # Open new frame to compare output
+    # switch_frame('comparison_frame')
 
 def display_output(output):
     """
@@ -224,7 +227,7 @@ file_select_back_button.pack(side=ctk.BOTTOM, pady = 10)
 
 file_select_compare_button = ctk.CTkButton(master = file_select_frame, text = "Compare",
                                             font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"),
-                                            fg_color="#575757", width = 100, height = 40, command= lambda: run_cpp_userfiles(userfiles))
+                                            fg_color="#575757", width = 100, height = 40, command= lambda: run_user_files(userfiles))
 file_select_compare_button.pack(side=ctk.BOTTOM, pady = 10)
 
 # Comparison page

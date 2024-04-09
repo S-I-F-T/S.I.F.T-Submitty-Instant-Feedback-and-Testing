@@ -28,14 +28,5 @@ class MultiLanguage:
     output_file = filepath.replace(".cpp", ".exe")
     arguments = ""
 
-    subprocess.run(["g++", os.path.abspath("test/helloworld.cpp"), "-o", "helloworld.exe"], check=True)
+    subprocess.run(["g++", os.path.abspath(filepath), "-o", output_file], check=True)
     subprocess.run(["./" + output_file, arguments])
-
-# subprocess.run(["g++", os.path.abspath("test/helloworld.cpp"), "-o", "helloworld.exe"], check=True, shell=True)
-# print(MultiLanguage.language)
-try:
-  MultiLanguage.run_cpp_file("test/helloworld.cpp")
-except subprocess.CalledProcessError as e:
-  raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
-
-# print(os.path.abspath("test/helloworld.cpp"))
