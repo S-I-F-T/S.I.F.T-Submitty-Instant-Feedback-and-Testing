@@ -31,8 +31,10 @@ def select_user_file(user_files):
     your_files.configure(text=user_files_text)
 
 def run_user_files(user_files):
+    file_output = None
+
     if (MultiLanguage.language == "c++"):
-        run_cpp_userfiles(user_files);
+        file_output = run_cpp_userfiles(user_files)
 
 def select_expected_file(expected_files):
     """
@@ -53,41 +55,9 @@ def run_cpp_userfiles(user_files):
     @param user_files: list of user files
     
     This function runs the user's C++ code and takes user to Compare Page where the output is displayed.
-    """
-    
-    # # if the file is not a C++ file, return an error
-    # if not user_files[0].endswith('.cpp'):
-    #     return "Error: File is not a C++ file"
-    
-    # # Make sure all file paths are relative
-    # user_files = [change_file_path(file) for file in user_files]
-    
-    # for file in user_files:
-    #     print(file)
-    #     print("\n\n\n")
-    #     if not os.path.exists(file):
-    #         return "Error: File does not exist"
-        
+    """    
         
     MultiLanguage.run_cpp_file(user_files[0])
-    output = None
-    output_to_write = ""
-    
-    # if output is None:
-    #     output_to_write = "Error: Compilation failed"
-    
-    # elif output[0]:
-    #     output_to_write = output[0]
-    
-    # elif output[1]:
-    #     output_to_write = output[1]
-    
-    # # write_output_to_file(output_to_write, 'user_output.txt')
-    
-    # display_output(output_to_write)
-    
-    # # Open new frame to compare output
-    # switch_frame('comparison_frame')
 
 def display_output(output):
     """
@@ -119,6 +89,9 @@ def switch_frame(frame_name):
         new_frame_obj.pack(fill='both', expand=True)
 
         current_frame = frame_name
+
+def change_language(lang):
+    MultiLanguage.language = lang
 
 ctk.set_appearance_mode('dark')
 ctk.set_default_color_theme('dark-blue')
@@ -235,7 +208,7 @@ comparison_frame = ctk.CTkFrame(master = root, fg_color="#343434", bg_color="#34
 
 comparison_title_frame = ctk.CTkFrame(master = comparison_frame, fg_color="#343434", bg_color="#343434")
 comparison_title_frame.pack(pady = 12, padx = 10)
-
+c
 comparison_title = ctk.CTkLabel(master = comparison_title_frame, text = 'Comparison',
                                 font = ctk.CTkFont(family='Calibri', size=30, weight = "bold"))
 comparison_title.pack(pady = 12, padx = 10)
@@ -272,8 +245,9 @@ settings_language_label = ctk.CTkLabel(master = settings_language_frame, text = 
                                         font = ctk.CTkFont(family='Calibri', size=20, weight = "bold"))
 settings_language_label.pack(side=ctk.LEFT, padx = 50)
 
-settings_language_dropdown = ctk.CTkOptionMenu(master = settings_language_frame, values = ['Python', 'Java', 'C++'],
-                                                font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"))
+settings_language_dropdown = ctk.CTkOptionMenu(master = settings_language_frame, values = ['python', 'java', 'c++'],
+                                                font = ctk.CTkFont(family='Calibri', size=15, weight = "bold"),
+                                                command= lambda v: change_language(v))
 settings_language_dropdown.pack(side=ctk.RIGHT, padx = 150)
 
 settings_theme_frame = ctk.CTkFrame(master = settings_frame, fg_color="#343434", bg_color="#343434")

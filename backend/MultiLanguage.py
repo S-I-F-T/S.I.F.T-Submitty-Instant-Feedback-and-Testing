@@ -29,4 +29,6 @@ class MultiLanguage:
     arguments = ""
 
     subprocess.run(["g++", os.path.abspath(filepath), "-o", output_file], check=True)
-    subprocess.run(["./" + output_file, arguments])
+    result = subprocess.run(["./" + output_file, arguments], capture_output=True, text=True)
+    
+    return result.stdout, result.stderr, result.returncode
