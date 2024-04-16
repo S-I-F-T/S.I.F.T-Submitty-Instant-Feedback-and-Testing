@@ -32,3 +32,19 @@ class MultiLanguage:
     result = subprocess.run(["./" + output_file, arguments], capture_output=True, text=True)
     
     return result.stdout, result.stderr, result.returncode
+  
+  @staticmethod
+  def run_python_file(filepath):
+    arguments = ""
+
+    result = subprocess.run(["python3", os.path.abspath(filepath)], capture_output=True, check=True)
+
+    return result.stdout, result.stderr, result.returncode
+
+  @staticmethod
+  def run_java_file(filepath):
+    subprocess.run(["javac", os.path.abspath(filepath)])
+
+    result = subprocess.run(["java", os.path.abspath(filepath)], capture_output=True, check=True)
+    
+    return result.stdout, result.stderr, result.returncode

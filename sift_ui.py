@@ -34,7 +34,13 @@ def run_user_files(user_files):
     file_output = None
 
     if (MultiLanguage.language == "c++"):
-        file_output = run_cpp_userfiles(user_files)
+        file_output = MultiLanguage.run_cpp_file(user_files[0])
+    elif (MultiLanguage.language == "python"):
+        file_output = MultiLanguage.run_python_file(user_files[0])
+    elif (MultiLanguage.language == "java"):
+        file_output = MultiLanguage.run_java_file(user_files[0])
+
+    print(file_output[0])
 
 def select_expected_file(expected_files):
     """
@@ -50,14 +56,6 @@ def select_expected_file(expected_files):
     expected_files_text = "\n".join(expected_files) if expected_files else "No files selected"
     expected_files_label.configure(text=expected_files_text)
     
-def run_cpp_userfiles(user_files):
-    """
-    @param user_files: list of user files
-    
-    This function runs the user's C++ code and takes user to Compare Page where the output is displayed.
-    """    
-        
-    MultiLanguage.run_cpp_file(user_files[0])
 
 def display_output(output):
     """
@@ -208,7 +206,7 @@ comparison_frame = ctk.CTkFrame(master = root, fg_color="#343434", bg_color="#34
 
 comparison_title_frame = ctk.CTkFrame(master = comparison_frame, fg_color="#343434", bg_color="#343434")
 comparison_title_frame.pack(pady = 12, padx = 10)
-c
+
 comparison_title = ctk.CTkLabel(master = comparison_title_frame, text = 'Comparison',
                                 font = ctk.CTkFont(family='Calibri', size=30, weight = "bold"))
 comparison_title.pack(pady = 12, padx = 10)
