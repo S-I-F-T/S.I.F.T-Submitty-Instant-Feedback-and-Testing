@@ -1,0 +1,30 @@
+body{
+    display:flex;
+    flex-direction: column;
+}
+
+.header{
+    width: 100%;
+    background-color: antiquewhite;
+}
+.header div{
+    width: 100px;
+    background-color: antiquewhite;
+}
+.mainBody{
+    display:flex;
+    justify-content: space-between;
+    background-color: aqua;
+}
+.navBar{
+    display:flex;
+    flex-shrink:0;
+    flex-direction: column;
+    background-color: red;
+
+}
+.mainContent{
+    display:flex;
+    flex-grow:4;
+    background-color: green;
+}
